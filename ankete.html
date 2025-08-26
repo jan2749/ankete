@@ -88,6 +88,31 @@
       width: 300px;
       height: 300px;
     }
+    .support-content {
+      display: none;
+      flex-direction: row;
+      align-items: flex-start;
+    }
+    .support-content:not([hidden]) {
+      display: flex;
+      align-items: flex-start;
+      position: relative;
+    }
+    .support-list {
+      flex: 1;
+    }
+    .support {
+      display: flex;
+      justify-content: space-between;
+      max-width: 180px;
+      padding: 2px 0;
+    }
+    .bar-chart {
+      position: absolute;
+      top: 10px;
+      left: 200px;
+      max-width: calc(85vw - 230px) !important;
+    }
   </style>
 </head>
 <body>
@@ -96,6 +121,7 @@
   </header>
 
   <nav>
+    <button class="tab" data-tab="najnovejse">Najnovejše</button>
     <button class="tab active" data-tab="mediana">Mediana</button>
     <button class="tab" data-tab="ninamedia">Ninamedia</button>
     <button class="tab" data-tab="parsifal">Parsifal</button>
@@ -103,9 +129,9 @@
   </nav>
 
   <main>
-    <section id="mediana" class="active">
+    <section id="najnovejse">
       <div class="card">
-        <h2>POP TV 24.8.2025</h2>
+        <h2>POP TV, 24.8.2025</h2>
         <h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Izračun sedežev</h3>
         <div class="seats-content" hidden>
           <div class="seats-list">
@@ -119,7 +145,117 @@
           <canvas class="chart" width="300" height="300"></canvas>
         </div> <br>
         <h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Podpora opredeljenih</h3>
-
+        <div class="support-content" hidden>
+          <div class="support-list">
+            <div class="support"><span><b>SDS:</b></span><span>22.85%</span></div>
+            <div class="support"><span><b>GS:</b></span><span>16.96%</span></div>
+            <div class="support"><span><b>Demokrati:</b></span><span>12.31%</span></div>
+            <div class="support"><span><b>Prebilič stranka:</b></span><span>7.11%</span></div>
+            <div class="support"><span><b>SD:</b></span><span>6.98%</span></div>
+            <div class="support"><span><b>NSi:</b></span><span>6.16%</span></div>
+            <div class="support"><span><b>Resnica:</b></span><span>4.65%</span></div>
+            <div class="support"><span><b>Vesna:</b></span><span>4.65%</span></div>
+            <div class="support"><span><b>Levica:</b></span><span>4.10%</span></div>
+            <div class="support"><span><b>SNS:</b></span><span>3.69%</span></div>
+            <div class="support"><span><b>Mi, Socialisti:</b></span><span>2.64%</span></div>
+            <div class="support"><span><b>Pirati:</b></span><span>1.92%</span></div>
+            <div class="support"><span><b>Glas upokojencev:</b></span><span>1.78%</span></div>
+            <div class="support"><span><b>SLS:</b></span><span>1.50%</span></div>
+            <div class="support"><span><b>Zaupanje:</b></span><span>1.09%</span></div>
+            <div class="support"><span><b>Fokus:</b></span><span>0.82%</span></div>
+            <div class="support"><span><b>S. Generacij:</b></span><span>0.41%</span></div>
+            <div class="support"><span><b>Zeleni:</b></span><span>0.41%</span></div>
+            <div class="support"><span><b>Suvereni:</b></span><span>0.14%</span></div>
+          </div>
+          <canvas class="bar-chart"></canvas>
+        </div> <br>
+      </div>
+    </section>  
+      
+    <section id="mediana" class="active">
+      <div class="card">
+        <h2>POP TV, 25.8.2025 *anketa z novimi strankami</h2>
+        <h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Izračun sedežev</h3>
+        <div class="seats-content" hidden>
+          <div class="seats-list">
+            <div class="seat"><span><b>SDS:</b></span><span>24</span></div>
+            <div class="seat"><span><b>GS:</b></span><span>17</span></div>
+            <div class="seat"><span><b>Demokrati:</b></span><span>13</span></div>
+            <div class="seat"><span><b>Prebilič stranka:</b></span><span>7</span></div>
+            <div class="seat"><span><b>SD:</b></span><span>7</span></div>
+            <div class="seat"><span><b>NSi:</b></span><span>6</span></div>
+            <div class="seat"><span><b>Resnica:</b></span><span>5</span></div>
+            <div class="seat"><span><b>Vesna:</b></span><span>5</span></div>
+            <div class="seat"><span><b>Levica:</b></span><span>4</span></div>
+          </div>
+          <canvas class="chart" width="300" height="300"></canvas>
+        </div> <br>
+        <h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Podpora opredeljenih</h3>
+        <div class="support-content" hidden>
+          <div class="support-list">
+            <div class="support"><span><b>SDS:</b></span><span>22.85%</span></div>
+            <div class="support"><span><b>GS:</b></span><span>16.96%</span></div>
+            <div class="support"><span><b>Demokrati:</b></span><span>12.31%</span></div>
+            <div class="support"><span><b>Prebilič stranka:</b></span><span>7.11%</span></div>
+            <div class="support"><span><b>SD:</b></span><span>6.98%</span></div>
+            <div class="support"><span><b>NSi:</b></span><span>6.16%</span></div>
+            <div class="support"><span><b>Resnica:</b></span><span>4.65%</span></div>
+            <div class="support"><span><b>Vesna:</b></span><span>4.65%</span></div>
+            <div class="support"><span><b>Levica:</b></span><span>4.10%</span></div>
+            <div class="support"><span><b>SNS:</b></span><span>3.69%</span></div>
+            <div class="support"><span><b>Mi, Socialisti:</b></span><span>2.64%</span></div>
+            <div class="support"><span><b>Pirati:</b></span><span>1.92%</span></div>
+            <div class="support"><span><b>Glas upokojencev:</b></span><span>1.78%</span></div>
+            <div class="support"><span><b>SLS:</b></span><span>1.50%</span></div>
+            <div class="support"><span><b>Zaupanje:</b></span><span>1.09%</span></div>
+            <div class="support"><span><b>Fokus:</b></span><span>0.82%</span></div>
+            <div class="support"><span><b>S. Generacij:</b></span><span>0.41%</span></div>
+            <div class="support"><span><b>Zeleni:</b></span><span>0.41%</span></div>
+            <div class="support"><span><b>Suvereni:</b></span><span>0.14%</span></div>
+          </div>
+          <canvas class="bar-chart"></canvas>
+        </div> <br>
+      </div>    
+        
+      <div class="card">
+        <h2>POP TV, 24.8.2025</h2>
+        <h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Izračun sedežev</h3>
+        <div class="seats-content" hidden>
+          <div class="seats-list">
+            <div class="seat"><span><b>SDS:</b></span><span>34</span></div>
+            <div class="seat"><span><b>GS:</b></span><span>24</span></div>
+            <div class="seat"><span><b>SD:</b></span><span>11</span></div>
+            <div class="seat"><span><b>NSi:</b></span><span>7</span></div>
+            <div class="seat"><span><b>Levica:</b></span><span>6</span></div>
+            <div class="seat"><span><b>Demokrati:</b></span><span>6</span></div>
+          </div>
+          <canvas class="chart" width="300" height="300"></canvas>
+        </div> <br>
+        <h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Podpora opredeljenih</h3>
+        <div class="support-content" hidden>
+          <div class="support-list">
+            <div class="support"><span><b>SDS:</b></span><span>22.85%</span></div>
+            <div class="support"><span><b>GS:</b></span><span>16.96%</span></div>
+            <div class="support"><span><b>Demokrati:</b></span><span>12.31%</span></div>
+            <div class="support"><span><b>Prebilič stranka:</b></span><span>7.11%</span></div>
+            <div class="support"><span><b>SD:</b></span><span>6.98%</span></div>
+            <div class="support"><span><b>NSi:</b></span><span>6.16%</span></div>
+            <div class="support"><span><b>Resnica:</b></span><span>4.65%</span></div>
+            <div class="support"><span><b>Vesna:</b></span><span>4.65%</span></div>
+            <div class="support"><span><b>Levica:</b></span><span>4.10%</span></div>
+            <div class="support"><span><b>SNS:</b></span><span>3.69%</span></div>
+            <div class="support"><span><b>Mi, Socialisti:</b></span><span>2.64%</span></div>
+            <div class="support"><span><b>Pirati:</b></span><span>1.92%</span></div>
+            <div class="support"><span><b>Glas upokojencev:</b></span><span>1.78%</span></div>
+            <div class="support"><span><b>SLS:</b></span><span>1.50%</span></div>
+            <div class="support"><span><b>Zaupanje:</b></span><span>1.09%</span></div>
+            <div class="support"><span><b>Fokus:</b></span><span>0.82%</span></div>
+            <div class="support"><span><b>S. Generacij:</b></span><span>0.41%</span></div>
+            <div class="support"><span><b>Zeleni:</b></span><span>0.41%</span></div>
+            <div class="support"><span><b>Suvereni:</b></span><span>0.14%</span></div>
+          </div>
+          <canvas class="bar-chart"></canvas>
+        </div> <br>
       </div>
     </section>
 
@@ -139,7 +275,30 @@
           <canvas class="chart" width="300" height="300"></canvas>
         </div> <br>
         <h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Podpora opredeljenih</h3>
-
+        <div class="support-content" hidden>
+          <div class="support-list">
+            <div class="support"><span><b>SDS:</b></span><span>22.85%</span></div>
+            <div class="support"><span><b>GS:</b></span><span>16.96%</span></div>
+            <div class="support"><span><b>Demokrati:</b></span><span>12.31%</span></div>
+            <div class="support"><span><b>Prebilič stranka:</b></span><span>7.11%</span></div>
+            <div class="support"><span><b>SD:</b></span><span>6.98%</span></div>
+            <div class="support"><span><b>NSi:</b></span><span>6.16%</span></div>
+            <div class="support"><span><b>Resnica:</b></span><span>4.65%</span></div>
+            <div class="support"><span><b>Vesna:</b></span><span>4.65%</span></div>
+            <div class="support"><span><b>Levica:</b></span><span>4.10%</span></div>
+            <div class="support"><span><b>SNS:</b></span><span>3.69%</span></div>
+            <div class="support"><span><b>Mi, Socialisti:</b></span><span>2.64%</span></div>
+            <div class="support"><span><b>Pirati:</b></span><span>1.92%</span></div>
+            <div class="support"><span><b>Glas upokojencev:</b></span><span>1.78%</span></div>
+            <div class="support"><span><b>SLS:</b></span><span>1.50%</span></div>
+            <div class="support"><span><b>Zaupanje:</b></span><span>1.09%</span></div>
+            <div class="support"><span><b>Fokus:</b></span><span>0.82%</span></div>
+            <div class="support"><span><b>S. Generacij:</b></span><span>0.41%</span></div>
+            <div class="support"><span><b>Zeleni:</b></span><span>0.41%</span></div>
+            <div class="support"><span><b>Suvereni:</b></span><span>0.14%</span></div>
+          </div>
+          <canvas class="bar-chart"></canvas>
+        </div> <br>
       </div>
     </section>
 
@@ -164,14 +323,27 @@
   </main>
 
   <script>
-    // 🎨 definiraš svoje barve tukaj
+    // 🎨 
     const partyColors = {
       "SDS": "#effa19",
       "GS": "#163fc7",
       "SD": "#d91a37",
       "NSi": "#32aec9",
       "Levica": "#871737",
-      "Demokrati": "#171287"
+      "Demokrati": "#171287",
+      "Resnica": "#a80fdb",
+      "Prebilič stranka": "#093b0d",
+      "Vesna": "#2a7530",
+      "SNS": "#030102",
+      "Mi, Socialisti": "#470b0f",
+      "Pirati": "#b34e14",
+      "Glas upokojencev": "#5c5ad6",
+      "SLS": "#16c748",
+      "Zaupanje": "#6316c7",
+      "Fokus": "#1d02a8",
+      "S. Generacij": "#00a67f",
+      "Zeleni": "#10a802",
+      "Suvereni": "#04240f"
     };
 
     // Tabs
@@ -250,6 +422,81 @@
             }
           }
         });
+      }
+
+      const supports = card.querySelectorAll('.support');
+      const supportLabels = [];
+      const supportData = [];
+      const supportColors = [];
+
+      supports.forEach(support => {
+        const name = support.querySelector('span b').innerText.replace(':','');
+        const value = parseFloat(support.querySelectorAll('span')[1].innerText.replace('%',''));
+        supportLabels.push(name);
+        supportData.push(value);
+        supportColors.push(partyColors[name] || "#ccc");
+
+        // dodaj barvni krog pred ime
+        const circle = document.createElement("span");
+        circle.style.display = "inline-block";
+        circle.style.width = "12px";
+        circle.style.height = "12px";
+        circle.style.borderRadius = "50%";
+        circle.style.backgroundColor = partyColors[name] || "#ccc";
+        circle.style.marginRight = "6px";
+        support.querySelector("span").prepend(circle);
+      });
+
+      const barCanvas = card.querySelector('canvas.bar-chart');
+      if (barCanvas) {
+        // Dinamična višina glede na število strank
+        const numParties = supportLabels.length;
+        const barHeight = Math.min(30 * numParties, 500); // 30px na stranko, max 500px
+        barCanvas.style.height = `${barHeight}px`; // Nastavi višino canvasa
+
+        // Prilagodi debelino stolpcev glede na zaslon
+        const barThickness = Math.max(15, Math.min(18, barHeight / numParties * (window.innerWidth / 1440)));
+        
+        const maxSupport = Math.ceil(Math.max(...supportData));
+
+        new Chart(barCanvas, {
+        type: 'bar',
+        data: {
+          labels: supportLabels,
+          datasets: [{
+            label: 'Podpora (%)',
+            data: supportData,
+            backgroundColor: supportColors,
+            barThickness: barThickness
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: { 
+              beginAtZero: true, 
+              max: maxSupport // Nastavi max na najvišjo podporo
+            },
+            y: {
+              ticks: {
+                autoSkip: false,
+                font: { size: 12 }
+              }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          },
+          layout: {
+            padding: {
+              top: 10,
+              bottom: 10
+            }
+          }
+        }
+      });
       }
     });
   </script>
