@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8">
+  <title>Politične ankete</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f8f9fa;
+    }
+    header {
+      background: #0d6efd;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      background: #e9ecef;
+      border-bottom: 1px solid #ccc;
+    }
+    nav button {
+      flex: 1;
+      padding: 1rem;
+      border: none;
+      background: inherit;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    nav button.active {
+      background: white;
+      border-bottom: 3px solid #0d6efd;
+      font-weight: bold;
+    }
+    section {
+      display: none;
+      padding: 1.5rem;
+    }
+    section.active {
+      display: block;
+    }
+    .card {
+      background: white;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .seat {
+      display: flex;
+      justify-content: space-between;
+      max-width: 160px;
+      padding: 2px 0;
+    }
+    .toggle {
+      cursor: pointer;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: .25rem;
+    }
+    .toggle::after {
+      content: "▸";
+      transition: transform .2s ease;
+    }
+    .toggle[aria-expanded="true"]::after {
+      content: "▾";
+    }
+    .seats-content {
+      display: none;
+      flex-direction: row;
+      align-items: flex-start;
+    }
+    .seats-content:not([hidden]) {
+      display: flex;
+    }
+    .seats-list {
+      flex: 1;
+    }
+    .chart {
+      flex: 1;
+      max-width: 300px;
+      margin-left: -500px; /* Graf bolj levo */
+      margin-top: -80px; /* Graf višje */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Politične ankete</h1>
+  </header>
+
+  <nav>
+    <button class="tab active" data-tab="mediana">Mediana</button>
+    <button class="tab" data-tab="ninamedia">Ninamedia</button>
+    <button class="tab" data-tab="parsifal">Parsifal</button>
+    <button class="tab" data-tab="ostali">Ostali</button>
+  </nav>
+
+  <main>
+    <section id="mediana" class="active">
+      <div class="card">
+        <h2>POP TV 24.8.2025</h2>
+        <h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Izračun sedežev</h3>
+        <div class="seats-content" hidden>
+          <div class="seats-list">
+            <div class="seat"><span><b>SDS:</b></span><span>34</span></div>
+            <div class="seat"><span><b>GS:</b></span><span>24</span></div>
+            <div class="seat"><span><b>SD:</b></span><span>11</span></div>
+            <div class="seat"><span><b>NSi:</b></span><span>7</span></div>
+            <div class="seat"><span><b>Levica:</b></span><span>6</span></div>
+            <div class="seat"><span><b>Demokrati:</b></span><span>6</span></div>
+          </div>
+          <canvas class="chart" width="300" height="300"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section id="ninamedia">
+      <div class="card">
+        <h2>Dnevnik 20.8.2025</h2>
+        <h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Izračun sedežev</h3>
+        <div class="seats-content" hidden>
+          <div class="seats-list">
+            <div class="seat"><span><b>SDS:</b></span><span>34</span></div>
+            <div class="seat"><span><b>GS:</b></span><span>24</span></div>
+            <div class="seat"><span><b>SD:</b></span><span>11</span></div>
+            <div class="seat"><span><b>NSi:</b></span><span>7</span></div>
+            <div class="seat"><span><b>Levica:</b></span><span>6</span></div>
+            <div class="seat"><span><b>Demokrati:</b></span><span>6</span></div>
+          </div>
+          <canvas class="chart" width="300" height="300"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section id="parsifal">
+      <div class="card">
+        <h2>Parsifal - Najnovejša anketa</h2>
+        <p><b>Stranka A:</b> 27%</p>
+        <p><b>Stranka B:</b> 15%</p>
+        <p><b>Stranka C:</b> 10%</p>
+        <p>...</p>
+      </div>
+    </section>
+
+    <section id="ostali">
+      <div class="card">
+        <h2>Ostali merilci javnega mnenja</h2>
+        <p><b>XYZ:</b> 21%</p>
+        <p><b>ABC:</b> 19%</p>
+        <p>...</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Tabs
+    const buttons = document.querySelectorAll(".tab");
+    const sections = document.querySelectorAll("section");
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        buttons.forEach(b => b.classList.remove("active"));
+        sections.forEach(s => s.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById(btn.dataset.tab).classList.add("active");
+      });
+    });
+
+    // Toggles
+    document.querySelectorAll(".toggle").forEach(toggle => {
+      const content = toggle.nextElementSibling;
+      if (!content) return;
+
+      content.hidden = true;
+      toggle.addEventListener("click", () => {
+        const willShow = content.hidden;
+        content.hidden = !willShow;
+        toggle.setAttribute("aria-expanded", String(willShow));
+      });
+
+      toggle.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          toggle.click();
+        }
+      });
+    });
+
+    // Chart
+    document.querySelectorAll('.card').forEach((card, i) => {
+      const seats = card.querySelectorAll('.seat');
+      const labels = [];
+      const data = [];
+
+      seats.forEach(seat => {
+        const name = seat.querySelector('span b').innerText.replace(':','');
+        const value = parseInt(seat.querySelectorAll('span')[1].innerText);
+        labels.push(name);
+        data.push(value);
+      });
+
+      const canvas = card.querySelector('canvas.chart');
+      if (canvas) {
+        new Chart(canvas, {
+          type: 'pie',
+          data: {
+            labels: labels,
+            datasets: [{
+              data: data,
+              backgroundColor: [
+                '#ff6384', '#36a2eb', '#ffcd56',
+                '#4bc0c0', '#9966ff', '#ff9f40',
+                '#c9cbcf', '#8bc34a', '#e91e63'
+              ]
+            }]
+          },
+          options: {
+            responsive: false,
+            plugins: {
+              legend: { position: 'right' }
+            }
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
