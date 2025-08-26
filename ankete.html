@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="sl">
 <head>
   <meta charset="UTF-8">
@@ -51,7 +51,7 @@
     .seat {
       display: flex;
       justify-content: space-between;
-      max-width: 160px;
+      max-width: 180px;
       padding: 2px 0;
     }
     .toggle {
@@ -77,20 +77,17 @@
       display: flex;
       align-items: flex-start;
       position: relative;
-
     }
     .seats-list {
       flex: 1;
     }
-
     .chart {
       position: absolute;    
-      top: -95px;          /* višina po potrebi */
-      left: 280px;     /* premik desno glede na seznam */
+      top: -95px;         
+      left: 280px;     
       width: 300px;
       height: 300px;
     }
-
   </style>
 </head>
 <body>
@@ -120,7 +117,9 @@
             <div class="seat"><span><b>Demokrati:</b></span><span>6</span></div>
           </div>
           <canvas class="chart" width="300" height="300"></canvas>
-        </div>
+        </div> <br>
+        <h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Podpora opredeljenih</h3>
+
       </div>
     </section>
 
@@ -137,8 +136,10 @@
             <div class="seat"><span><b>Levica:</b></span><span>6</span></div>
             <div class="seat"><span><b>Demokrati:</b></span><span>6</span></div>
           </div>
-             <canvas class="chart" width="300" height="300"></canvas>
-        </div>
+          <canvas class="chart" width="300" height="300"></canvas>
+        </div> <br>
+        <h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Podpora opredeljenih</h3>
+
       </div>
     </section>
 
@@ -163,6 +164,16 @@
   </main>
 
   <script>
+    // 🎨 definiraš svoje barve tukaj
+    const partyColors = {
+      "SDS": "#effa19",
+      "GS": "#163fc7",
+      "SD": "#d91a37",
+      "NSi": "#32aec9",
+      "Levica": "#871737",
+      "Demokrati": "#171287"
+    };
+
     // Tabs
     const buttons = document.querySelectorAll(".tab");
     const sections = document.querySelectorAll("section");
@@ -196,17 +207,29 @@
       });
     });
 
-    // Chart
+    // Chart + barvni krogi
     document.querySelectorAll('.card').forEach((card, i) => {
       const seats = card.querySelectorAll('.seat');
       const labels = [];
       const data = [];
+      const colors = [];
 
       seats.forEach(seat => {
         const name = seat.querySelector('span b').innerText.replace(':','');
         const value = parseInt(seat.querySelectorAll('span')[1].innerText);
         labels.push(name);
         data.push(value);
+        colors.push(partyColors[name] || "#ccc");
+
+        // dodaj barvni krog pred ime
+        const circle = document.createElement("span");
+        circle.style.display = "inline-block";
+        circle.style.width = "12px";
+        circle.style.height = "12px";
+        circle.style.borderRadius = "50%";
+        circle.style.backgroundColor = partyColors[name] || "#ccc";
+        circle.style.marginRight = "6px";
+        seat.querySelector("span").prepend(circle);
       });
 
       const canvas = card.querySelector('canvas.chart');
@@ -217,11 +240,7 @@
             labels: labels,
             datasets: [{
               data: data,
-              backgroundColor: [
-                '#ff6384', '#36a2eb', '#ffcd56',
-                '#4bc0c0', '#9966ff', '#ff9f40',
-                '#c9cbcf', '#8bc34a', '#e91e63'
-              ]
+              backgroundColor: colors
             }]
           },
           options: {
