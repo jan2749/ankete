@@ -75,16 +75,22 @@
     }
     .seats-content:not([hidden]) {
       display: flex;
+      align-items: flex-start;
+      position: relative;
+
     }
     .seats-list {
       flex: 1;
     }
+
     .chart {
-      flex: 1;
-      max-width: 300px;
-      margin-left: -500px; /* Graf bolj levo */
-      margin-top: -80px; /* Graf višje */
+      position: absolute;    
+      top: -95px;          /* višina po potrebi */
+      left: 280px;     /* premik desno glede na seznam */
+      width: 300px;
+      height: 300px;
     }
+
   </style>
 </head>
 <body>
@@ -131,7 +137,7 @@
             <div class="seat"><span><b>Levica:</b></span><span>6</span></div>
             <div class="seat"><span><b>Demokrati:</b></span><span>6</span></div>
           </div>
-          <canvas class="chart" width="300" height="300"></canvas>
+             <canvas class="chart" width="300" height="300"></canvas>
         </div>
       </div>
     </section>
