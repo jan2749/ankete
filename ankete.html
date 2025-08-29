@@ -14,7 +14,14 @@
       background: #0d6efd;
       color: white;
       padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header h1 {
+      flex: 1;
       text-align: center;
+      margin: 0;
     }
     nav {
       display: flex;
@@ -50,10 +57,9 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       transition: transform 0.15s ease;
     }
-    .card:hover{
-        transform: scale(1.01);
+    .card:hover {
+      transform: scale(1.01);
     }
-    
     .seat {
       display: flex;
       justify-content: space-between;
@@ -66,24 +72,14 @@
       display: inline-flex;
       align-items: center;
       gap: .25rem;
+      background-color: #e9ecef;
+      padding: 0.5rem;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
     }
-    .toggle {
-      cursor: pointer;
-      user-select: none;
-      display: inline-flex;
-      align-items: center;
-      gap: .25rem;
-      background-color: #e9ecef; /* Svetlo sivo ozadje za poudarek */
-      padding: 0.5rem; /* Malo oblazinjenja */
-      border-radius: 4px; /* Zaobljeni robovi */
-      transition: background-color 0.2s ease; /* Gladka animacija */
-    }
-    
     .toggle:hover {
-      background-color: #d3d6db; /* Temnejše ozadje ob prehodu */
+      background-color: #d3d6db;
     }
-
-
     .toggle::after {
       content: "▸";
       transition: transform .2s ease;
@@ -106,9 +102,9 @@
       flex: 1;
     }
     .chart {
-      position: absolute;    
-      top: -95px;         
-      left: 280px;     
+      position: absolute;
+      top: -95px;
+      left: 280px;
       width: 300px;
       height: 300px;
     }
@@ -138,19 +134,73 @@
       max-width: calc(85vw - 230px) !important;
     }
     h2 {
-       font-size: 1.5em; 
+      font-size: 1.5em;
     }
-    h3{
-        font-size: 1em;
+    h3 {
+      font-size: 1em;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+    }
+    .modal-content h2 {
+      margin-top: 0;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
     }
   </style>
 </head>
 <body>
   <header>
+    <a href="https://x.com/Jann27589642" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: white; margin-left: 1rem;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/X_logo_2023_%28white%29.png/500px-X_logo_2023_%28white%29.png" style="width: 40px; height: auto;">
+      <span style="font-size: 0.8rem; margin-top: 0.25rem;">@jan</span>
+    </a>
     <h1>Politične ankete - Volitve 2026</h1>
-    <a href="https://x.com/Jann27589642"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/X_logo_2023_%28white%29.png/500px-X_logo_2023_%28white%29.png"></img></a>
+    <a href="#" onclick="openModal()" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: white; margin-right: 1rem;">
+      <img src="https://www.iconsdb.com/icons/preview/white/info-xxl.png" style="width: 40px; height: auto;">
+      <span style="font-size: 0.8rem; margin-top: 0.25rem;">Info</span>
+    </a>
   </header>
-    
+
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+      <h2>O spletni strani</h2>
+      <p>Ta spletna stran prikazuje rezultate političnih anket podporam strankam za volitve 2026 v Sloveniji. Cilj strani je na enem mestu zbrati vse pomembne aktualne ankete, vključno z izračunom poslanskih mandatov. Napake so možne in celo pričakovane(lahko zaradi napačnega vnosa ankete ali napačnega delovanja strani), na nje me lahko opozorite preko mojega X računa(do njega vas pripelje klik na ikono X na levi strani)</p>
+      <h2>Kako deluje</h2>
+      <h3>Vnašanje anket</h3>
+      <p>Rezultate ankete prilepim ročno v eno izmed sekcij(Mediana, Ninamedia, Parsifal, Ostali), anketa se pa avtomatsko doda in razporedi pod sekcijo Najnovejše glede na vneseni datum. Datum, ki ga vidite v naslovu ankete predstavlja datum objave in ne datum izvedbe.</p>
+      <h3>Podpora opredeljenih</h3>
+      <p>Podpora opredeljenih je izračunana s precej preprostim lastnoročno napisanim programom v Pythonu.Kot neopredeljene štejem tiste, ki na anketo odgovorijo z "ne vem", "nobene" in tudi "ne povem".  Za boljšo predstavo je desno narejen tudi grafičen prikaz podpore.</p>
+      <h3>Izračun sedežev</h3>
+      <p>Izračun sedežev je prav tako narejen s Python programom, ki sem ga napisal že pred časom. Prejme podporo opredeljenih in sedeže razdeli med strankami s podporo nad 4% glede na njihovo podporo. Za "vizualizacijo parlamenta" je desno tudi krožni diagram poslancev po strankah. </p>
+    </div>
+  </div>
+
   <nav>
     <button class="tab" data-tab="najnovejse">Najnovejše</button>
     <button class="tab active" data-tab="mediana">Mediana</button>
@@ -160,8 +210,7 @@
   </nav>
 
   <main>
-    <section id="najnovejse">
-    </section>    
+    <section id="najnovejse"></section>    
     <section id="mediana" class="active">
       <div class="card" data-date="2025-08-25"><h2>POP TV, 25.8.2025 *anketa z novimi strankami</h2><h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Izračun sedežev</h3><div class="seats-content" hidden><div class="seats-list"><div class="seat"><span><b>SDS:</b></span><span>24</span></div><div class="seat"><span><b>GS:</b></span><span>17</span></div><div class="seat"><span><b>Demokrati:</b></span><span>13</span></div><div class="seat"><span><b>Prebilič stranka:</b></span><span>7</span></div><div class="seat"><span><b>SD:</b></span><span>7</span></div><div class="seat"><span><b>NSi:</b></span><span>6</span></div><div class="seat"><span><b>Resnica:</b></span><span>5</span></div><div class="seat"><span><b>Vesna:</b></span><span>5</span></div><div class="seat"><span><b>Levica:</b></span><span>4</span></div></div><canvas class="chart" width="300" height="300"></canvas></div><br><h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Podpora opredeljenih</h3><div class="support-content" hidden><div class="support-list"><div class="support"><span><b>SDS:</b></span><span>22.85%</span></div><div class="support"><span><b>GS:</b></span><span>16.96%</span></div><div class="support"><span><b>Demokrati:</b></span><span>12.31%</span></div><div class="support"><span><b>Prebilič stranka:</b></span><span>7.11%</span></div><div class="support"><span><b>SD:</b></span><span>6.98%</span></div><div class="support"><span><b>NSi:</b></span><span>6.16%</span></div><div class="support"><span><b>Resnica:</b></span><span>4.65%</span></div><div class="support"><span><b>Vesna:</b></span><span>4.65%</span></div><div class="support"><span><b>Levica:</b></span><span>4.10%</span></div><div class="support"><span><b>SNS:</b></span><span>3.69%</span></div><div class="support"><span><b>Mi, Socialisti:</b></span><span>2.64%</span></div><div class="support"><span><b>Pirati:</b></span><span>1.92%</span></div><div class="support"><span><b>Glas upokojencev:</b></span><span>1.78%</span></div><div class="support"><span><b>SLS:</b></span><span>1.50%</span></div><div class="support"><span><b>Zaupanje:</b></span><span>1.09%</span></div><div class="support"><span><b>Fokus:</b></span><span>0.82%</span></div><div class="support"><span><b>S. Generacij:</b></span><span>0.41%</span></div><div class="support"><span><b>Zeleni:</b></span><span>0.41%</span></div><div class="support"><span><b>Suvereni:</b></span><span>0.14%</span></div></div><canvas class="bar-chart"></canvas></div><br></div>
       <div class="card" data-date="2025-08-24"><h2>POP TV, 24.8.2025</h2><h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Izračun sedežev</h3><div class="seats-content" hidden><div class="seats-list"><div class="seat"><span><b>SDS:</b></span><span>34</span></div><div class="seat"><span><b>GS:</b></span><span>24</span></div><div class="seat"><span><b>SD:</b></span><span>11</span></div><div class="seat"><span><b>NSi:</b></span><span>7</span></div><div class="seat"><span><b>Levica:</b></span><span>6</span></div><div class="seat"><span><b>Demokrati:</b></span><span>6</span></div></div><canvas class="chart" width="300" height="300"></canvas></div><br><h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Podpora opredeljenih</h3><div class="support-content" hidden><div class="support-list"><div class="support"><span><b>SDS:</b></span><span>31.43%</span></div><div class="support"><span><b>GS:</b></span><span>22.08%</span></div><div class="support"><span><b>SD:</b></span><span>9.94%</span></div><div class="support"><span><b>NSi:</b></span><span>6.43%</span></div><div class="support"><span><b>Levica:</b></span><span>5.99%</span></div><div class="support"><span><b>Demokrati:</b></span><span>5.41%</span></div><div class="support"><span><b>Vesna:</b></span><span>3.80%</span></div><div class="support"><span><b>Resnica:</b></span><span>3.65%</span></div><div class="support"><span><b>SNS:</b></span><span>3.36%</span></div><div class="support"><span><b>Pirati:</b></span><span>2.05%</span></div><div class="support"><span><b>SLS:</b></span><span>2.05%</span></div><div class="support"><span><b>Zeleni:</b></span><span>0.29%</span></div></div><canvas class="bar-chart"></canvas></div><br></div>
@@ -169,15 +218,13 @@
     <section id="ninamedia">
       <div class="card" data-date="2025-08-13"><h2>Dnevnik, 13.8.2025</h2><h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Izračun sedežev</h3><div class="seats-content" hidden><div class="seats-list"><div class="seat"><span><b>SDS:</b></span><span>33</span></div><div class="seat"><span><b>GS:</b></span><span>24</span></div><div class="seat"><span><b>SD:</b></span><span>10</span></div><div class="seat"><span><b>NSi:</b></span><span>8</span></div><div class="seat"><span><b>Levica:</b></span><span>7</span></div><div class="seat"><span><b>Demokrati:</b></span><span>6</span></div></div><canvas class="chart" width="300" height="300"></canvas></div><br><h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Podpora opredeljenih</h3><div class="support-content" hidden><div class="support-list"><div class="support"><span><b>SDS:</b></span><span>35.59%</span></div><div class="support"><span><b>GS:</b></span><span>25.28%</span></div><div class="support"><span><b>SD:</b></span><span>11.11%</span></div><div class="support"><span><b>NSi:</b></span><span>8.53%</span></div><div class="support"><span><b>Levica:</b></span><span>7.57%</span></div><div class="support"><span><b>Demokrati:</b></span><span>6.28%</span></div><div class="support"><span><b>SLS:</b></span><span>0.48%</span></div><div class="support"><span><b>Vesna:</b></span><span>0.48%</span></div></div><canvas class="bar-chart"></canvas></div><br></div>
     </section>
-    <section id="parsifal">
-    </section>
+    <section id="parsifal"></section>
     <section id="ostali">
       <div class="card" data-date="2025-08-27"><h2>Valicon za Siol, 27.8.2025</h2><h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Izračun sedežev</h3><div class="seats-content" hidden><div class="seats-list"><div class="seat"><span><b>SDS:</b></span><span>27</span></div><div class="seat"><span><b>GS:</b></span><span>22</span></div><div class="seat"><span><b>SD:</b></span><span>10</span></div><div class="seat"><span><b>Demokrati:</b></span><span>8</span></div><div class="seat"><span><b>Resnica:</b></span><span>6</span></div><div class="seat"><span><b>Levica:</b></span><span>6</span></div><div class="seat"><span><b>NSi:</b></span><span>5</span></div><div class="seat"><span><b>Vesna:</b></span><span>4</span></div></div><canvas class="chart" width="300" height="300"></canvas></div><br><h3 class="toggle" role="button" tabindex="0" aria-expanded="false">Podpora opredeljenih</h3><div class="support-content" hidden><div class="support-list"><div class="support"><span><b>SDS:</b></span><span>24.89%</span></div><div class="support"><span><b>GS:</b></span><span>20.91%</span></div><div class="support"><span><b>SD:</b></span><span>8.86%</span></div><div class="support"><span><b>Demokrati:</b></span><span>7.73%</span></div><div class="support"><span><b>Resnica:</b></span><span>5.80%</span></div><div class="support"><span><b>Levica:</b></span><span>5.34%</span></div><div class="support"><span><b>NSi:</b></span><span>4.89%</span></div><div class="support"><span><b>Vesna:</b></span><span>4.09%</span></div><div class="support"><span><b>Pirati:</b></span><span>3.75%</span></div><div class="support"><span><b>SNS:</b></span><span>3.52%</span></div><div class="support"><span><b>Zeleni:</b></span><span>2.61%</span></div><div class="support"><span><b>SLS:</b></span><span>2.16%</span></div><div class="support"><span><b>Glas upokojencev:</b></span><span>1.82%</span></div></div><canvas class="bar-chart"></canvas></div><br></div>
     </section>
   </main>
 
   <script>
-    // 🎨 
     const partyColors = {
       "SDS": "#effa19",
       "GS": "#163fc7",
@@ -200,7 +247,21 @@
       "Suvereni": "#04240f"
     };
 
-    // Tabs
+    function openModal() {
+      document.getElementById("infoModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("infoModal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("infoModal");
+      if (event.target === modal) {
+        closeModal();
+      }
+    };
+
     const buttons = document.querySelectorAll(".tab");
     const sections = document.querySelectorAll("section");
 
@@ -234,13 +295,11 @@
       });
     }
 
-    // Populate Najnovejše
     function populateLatestPolls() {
       const latestSection = document.getElementById("najnovejse");
-      latestSection.innerHTML = ""; // Clear existing content
+      latestSection.innerHTML = "";
       const allCards = Array.from(document.querySelectorAll("section:not(#najnovejse) .card"));
 
-      // Posodobi data-date na podlagi datuma v h2 (format DD.M.YYYY)
       allCards.forEach(card => {
         const h2Text = card.querySelector('h2').innerText;
         const dateMatch = h2Text.match(/\d{1,2}\.\d{1,2}\.\d{4}/);
@@ -254,7 +313,7 @@
       const sortedCards = allCards.sort((a, b) => {
         const dateA = new Date(a.dataset.date);
         const dateB = new Date(b.dataset.date);
-        return dateB - dateA; // Sort descending (newest first)
+        return dateB - dateA;
       });
 
       sortedCards.forEach(card => {
@@ -268,12 +327,10 @@
         } else if (sourceId === 'parsifal') {
           h2.textContent = `Parsifal za ${h2.textContent}`;
         }
-        // Za 'ostali' brez spremembe
         latestSection.appendChild(clonedCard);
       });
     }
 
-    // Chart + barvni krogi
     function renderCharts() {
       document.querySelectorAll('.card').forEach((card, i) => {
         const seats = card.querySelectorAll('.seat');
@@ -288,7 +345,6 @@
           data.push(value);
           colors.push(partyColors[name] || "#ccc");
 
-          // dodaj barvni krog pred ime
           const circle = document.createElement("span");
           circle.style.display = "inline-block";
           circle.style.width = "12px";
@@ -331,7 +387,6 @@
           supportData.push(value);
           supportColors.push(partyColors[name] || "#ccc");
 
-          // dodaj barvni krog pred ime
           const circle = document.createElement("span");
           circle.style.display = "inline-block";
           circle.style.width = "12px";
@@ -392,7 +447,6 @@
       });
     }
 
-    // Initialize
     populateLatestPolls();
     initToggles();
     renderCharts();
